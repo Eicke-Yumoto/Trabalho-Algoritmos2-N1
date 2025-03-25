@@ -19,18 +19,22 @@ int main() {
         
         printf("Frase codificada: %s", frase);
         
+        do {
+            printf("\n\nContinuar? S/N: ");
+            scanf("%c", &option);
+            getchar(); // exclui o '\n' do buffer.
+        } while( option != 'S' && option != 's' && option != 'N' && option != 'n');
         
-        printf("\n\nContinuar? S/N: ");
-        scanf("%c", &option);
-        getchar(); // exclui o '\n' do buffer.
         
-        if(option == 'N' || option == 'n') {
+        if((option == 'N' || option == 'n') && (option != 'S' && option != 's')) {
             loop = 0;
             printf("\n\nSaindo do programa...\n\n");
             break;
         }
         
-    } while(option != 'S' && option != 's' && option != 'N' && option != 'n');
+        printf("\n");
+        
+    } while( loop );
     
     return 0;
 }
