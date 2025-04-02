@@ -4,10 +4,33 @@
 int main() {
     char option, frase[100];
     int loop = 1;
+    int validacaoEntrada = 0;
+    int caracteres;
     do {
-        printf("Escreva a frase a ser codificada: ");
-        fgets(frase, 100, stdin);
-        frase[strcspn(frase, "\n")] = 0; // exclui o '\n' incluido automaticamente pelo fgets.
+        do {
+            caracteres = 0;
+            validacaoEntrada = 0;
+            printf("Escreva a frase a ser codificada: ");
+            fgets(frase, 100, stdin);
+            frase[strcspn(frase, "\n")] = 0; // exclui o '\n' incluido automaticamente pelo fgets.
+            
+            for(int i = 0; i < 100; i++) {
+                if(frase[i] == ';'){
+                    caracteres = i;
+                    validacaoEntrada = 1;
+                }
+            }
+
+            if(validacaoEntrada){
+                break;
+            } else {
+                printf("\n[!] Insira ';' no final da mensagem [!]\n\n");
+            }
+
+            
+        } while (validacaoEntrada == 0);
+
+        printf("Texto com %d caracteres.\n\n", caracteres);
 
         for(int i = 0; i < 100; i++) {
             if (frase[i] == '\0') {
@@ -16,24 +39,26 @@ int main() {
                 frase[i] = (5*frase[i] + 100) % 256;
             }
         }
-        
+
         printf("Frase codificada: %s", frase);
         
         do {
             printf("\n\nContinuar? S/N: ");
             scanf("%c", &option);
-            getchar(); // exclui o '\n' do buffer.
+            while (getchar() != '\n'); //limpa o buffer até chegar no '\n'
+            if(option != 'S' && option != 's' && option != 'N' && option != 'n') {
+                printf("\n[!] Escreva apenas 'S ou 'N' [!]" );
+            }
         } while( option != 'S' && option != 's' && option != 'N' && option != 'n');
-        
-        
-        if((option == 'N' || option == 'n') && (option != 'S' && option != 's')) {
+
+        if(option == 'N' || option == 'n') {
             loop = 0;
             printf("\n\nSaindo do programa...\n\n");
             break;
         }
-        
+
         printf("\n");
-        
+
     } while( loop );
     
     return 0;
