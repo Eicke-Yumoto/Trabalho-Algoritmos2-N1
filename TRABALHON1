@@ -1,10 +1,13 @@
 #include <stdio.h>
 
+//IMPLEMENTADO POR: EICKE YUMOTO
+
 int main() {
     char option, frase[100];
     int loop = 1;
     int validacaoEntrada = 0;
     int caracteres;
+    printf("\n*************[!] BEM VINDO AO CODIFICADOR [!]***************\n\n");
     do {
         do {
             caracteres = 0;
